@@ -44,7 +44,7 @@ namespace GifLib
         /// <param name="length">An <see cref="int"/> value representing the final length of the animation in milliseconds.</param>
 		/// <param name="loop">An <see cref="bool"/> value representing whether the animation should loop and continue endlessly.</param>
         /// <returns>An awaitable <see cref="System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
-        System.Threading.Tasks.Task SaveImagesAsGifAsync(System.IO.Stream stream, System.Collections.Generic.ICollection<System.Drawing.Bitmap> images, int length, bool loop);
+        Task SaveImagesAsGifAsync(System.IO.Stream stream, System.Collections.Generic.ICollection<System.Drawing.Bitmap> images, int length, bool loop);
 
         /// <summary>
         /// 
@@ -54,7 +54,7 @@ namespace GifLib
         /// <param name="fps">A <see cref="float"/> value representing the frames per second of the final animation.</param>
 		/// <param name="loop">An <see cref="bool"/> value representing whether the animation should loop and continue endlessly.</param>
         /// <returns>An awaitable <see cref="System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
-        System.Threading.Tasks.Task SaveImagesAsGifAsync(System.IO.Stream stream, System.Collections.Generic.ICollection<System.Drawing.Bitmap> images, float fps, bool loop);
+        Task SaveImagesAsGifAsync(System.IO.Stream stream, System.Collections.Generic.ICollection<System.Drawing.Bitmap> images, float fps, bool loop);
 
         /// <summary>
         /// 
@@ -65,6 +65,6 @@ namespace GifLib
         /// <param name="fps">A <see cref="float"/> value representing the maximum frames per second of the final animation.</param>
 		/// <param name="loop">An <see cref="bool"/> value representing whether the animation should loop and continue endlessly.</param>
         /// <returns>An awaitable <see cref="System.Threading.Tasks.Task"/> that represents the asynchronous operation.</returns>
-        System.Threading.Tasks.Task SaveImagesAsGifAsync(System.IO.Stream stream, System.Collections.Generic.ICollection<System.Drawing.Bitmap> images, int length, float fps, bool loop);
+        Task SaveImagesAsGifAsync(System.IO.Stream stream, System.Collections.Generic.ICollection<System.Drawing.Bitmap> images, int length, float fps, bool loop);
     }
 }
