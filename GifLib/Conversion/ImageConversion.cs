@@ -2,6 +2,7 @@
 using ImageMagick;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -35,6 +36,7 @@ namespace GifLib
             }
 
             // Converting all bitmaps to MagickImages
+            
             ICollection<IMagickImage> magickImages = new System.Collections.ObjectModel.Collection<IMagickImage>();
             foreach (Bitmap bitmap in images)
             {
@@ -49,16 +51,12 @@ namespace GifLib
 
                 magickImages.Add(image);
             }
-
+          
             using (MagickImageCollection collection = new MagickImageCollection(magickImages))
             {
-                QuantizeSettings settings = new QuantizeSettings();
-                settings.Colors = 256;
-                collection.Quantize(settings);
-
                 collection.Optimize();
                 collection.Write(stream, MagickFormat.Gif);
-            }
+           }
         }
 
         public void SaveImagesAsGif(Stream stream, ICollection<Bitmap> images, int length, float fps, bool loop)

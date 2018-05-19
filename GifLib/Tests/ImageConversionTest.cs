@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -19,12 +20,11 @@ namespace GifLib.Tests
         [Test]
         public async Task SaveImagesAsGifOnLengthAsyncTest()
         {
-            IList<Bitmap> bitmapList = GetBitmapImagesList(ValidImagesFolder, 11);
+            IList<Bitmap> bitmapList = GetBitmapImagesList(ValidImagesFolder, 61);
             IImageConversion imageConvertor = new ImageConversion();
             Stream stream = new MemoryStream();
-
-            int length = 3630;
-            await imageConvertor.SaveImagesAsGifAsync(stream, bitmapList, length, false);
+         
+            imageConvertor.SaveImagesAsGif(stream, bitmapList, 3630, true);
             stream.Position = 0;
             using (var fileStream = new FileStream(@"D:\blndr\test.gif", FileMode.Create, FileAccess.Write))
             {
@@ -32,7 +32,7 @@ namespace GifLib.Tests
             }
 
             Image image = Image.FromStream(stream);
-            ImageValidation(image, 11, 330, false);
+            ImageValidation(image, 44, 80, true);
         }
 
         [Test]
@@ -105,7 +105,7 @@ namespace GifLib.Tests
             }
 
             Image image = Image.FromStream(stream);
-            ImageValidation(image, 11, 330, false);
+            ImageValidation(image, 44, 80, false);
         }
 
         [Test]
@@ -168,11 +168,13 @@ namespace GifLib.Tests
         private IList<Bitmap> GetBitmapImagesList(String folder, int numberOfImages)
         {
             String currentPath = System.AppDomain.CurrentDomain.BaseDirectory;
+            String imagePath = currentPath + folder;
+            var files = Directory.GetFiles(imagePath);
+            
             IList<Bitmap> bitmapList = new List<Bitmap>();
-            for (int i = 1; i < numberOfImages + 1; i++)
+            foreach (string file in files) 
             {
-                String imagePath = currentPath + folder + @"\" + i + ".jpg";
-                System.Drawing.Bitmap image = (Bitmap)Bitmap.FromFile(imagePath);
+                System.Drawing.Bitmap image = (Bitmap)Bitmap.FromFile(file);
                 bitmapList.Add(image);
             }
 
